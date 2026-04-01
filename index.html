@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Трубопромстрой</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #0f1c2e, #1f3b73);
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Для поддержки Safari/iOS */
+    border-radius: 20px;
+    padding: 30px 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Исправленный блок логотипа */
+.logo-box {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 15px auto;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Чтобы лого не искажалось */
+    display: block;
+}
+
+.company {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.director {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    background: #e5e7eb;
+    color: #111;
+    text-align: center;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.25);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Убирает синий квадрат при клике на мобильном */
+}
+
+.btn:active {
+    transform: scale(0.97);
+    background: #d1d5db;
+}
+
+.info {
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* Исправленная модалка */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999; /* Чтобы была поверх всего */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+}
+
+.modal-content {
+    background: white;
+    color: black;
+    margin: 15% auto;
+    padding: 25px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #000;
+    padding: 5px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="logo-box">
+            <img src="logo.png" class="logo" alt="Трубопромстрой">
+        </div>
+
+        <div class="company">ТОО «Трубопромстрой»</div>
+        <div class="director">Директор: Измайлов Ахмет Асхабович</div>
+
+        <div class="buttons">
+            <a href="tel:+77017343435" class="btn">Позвонить руководителю</a>
+            <a href="https://wa.me/77017343435" class="btn">Написать в WhatsApp</a>
+            <a href="mailto:trubopromstroy@mail.ru" class="btn">Отправить Email</a>
+            <button id="showReq" class="btn">Реквизиты компании</button>
+        </div>
+
+        <div class="info">
+            г. Караганда<br>
+            ул. Полтавская, 22
+        </div>
+
+        <div class="footer">
+            Трубопромстрой • Надежность • Качество • Опыт
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeReq">&times;</span>
+    <h3 style="margin-top:0">Реквизиты компании</h3>
+
+    <p><b>БИН:</b> 000740006494</p>
+    <p><b>ИИК:</b> KZ7196509F0008869354</p>
+    <p><b>Банк:</b> АО «ForteBank», г. Караганда</p>
+    <p><b>БИК:</b> IRTYKZKA</p>
+
+    <p><b>Email:</b><br>
+    Ahmet.izmailov.life@gmail.com<br>
+    trubopromstroy@mail.ru</p>
+
+    <p><b>Телефон:</b><br>
+    +7 700 734 34 35<br>
+    +7 701 734 34 35</p>
+  </div>
+</div>
+
+<script>
+// Используем более надежный метод получения элементов
+const modal = document.getElementById("modal");
+const btn = document.getElementById("showReq");
+const span = document.getElementById("closeReq");
+
+// Открыть (работает и на клик, и на тач)
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Закрыть на крестик
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Закрыть при клике на темный фон
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
